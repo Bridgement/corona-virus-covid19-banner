@@ -159,22 +159,6 @@ function covid_banner_settings_page() {
 		var style_text_color = document.createElement('style');
 
 		// Banner Text
-        document.getElementById('preview_banner_text').innerHTML = `
-        <div id="covid-banner" class="covid-banner"><div class="covid-banner-text"><span>
-            <h2 class="covid-header">COVID-19</h2>
-            <p class="covid-text">Stay informed with official news &amp; stats:</p>
-            <a class="covid-link" href="https://sacoronavirus.co.za/"  target="_blank">
-                <span>sacoronavirus.co.za</span>
-            </a>
-            <br />
-            <div class="covid-footer">
-            Powered by
-                <a href="https://www.bridgement.com target="_blank">
-                    Bridgement
-                </a>
-            <div>
-        </span></div></div>
-        `;
 
 		// Background Color
 		style_background_color.type = 'text/css';
