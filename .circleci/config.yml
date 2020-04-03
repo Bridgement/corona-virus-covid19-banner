@@ -27,8 +27,8 @@ jobs:
                   name: "Deploy to SVN"
                   command: |
                       echo ${GIT_COMMIT_DESC}
-                      svn up --no-auth-cache
-                      svn ci -m "${GIT_COMMIT_DESC}" --username ${SVN_USERNAME} --password ${SVN_PASSWORD} --no-auth-cache
+                      sudo svn up --no-auth-cache
+                      sudo svn ci -m "${GIT_COMMIT_DESC}" --username ${SVN_USERNAME} --password ${SVN_PASSWORD} --no-auth-cache
 
 workflows:
     deploy_to_svn:
