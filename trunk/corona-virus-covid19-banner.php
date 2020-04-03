@@ -3,12 +3,12 @@
  * Plugin Name: corona-virus-covid19-banner
  * Plugin URI: https://www.bridgement.com
  * Description: Display South African COVID-19 banner
- * Version: 0.2.6
+ * Version: 0.3.0
  * Author: Bridgement
  * License: GPL2
  *
  * @package corona-virus-covid19-banner
- * @version 0.2.6
+ * @version 0.3.0
  * @author Bridgement <support@bridgement.com>
  */
 
@@ -20,6 +20,7 @@ function covid_banner() {
 
         $script_params = array(
 			'in_array' => in_array(get_the_ID(), explode(",", get_option('disabled_pages_array'))),
+			'disabled_pages_array' => explode(",", get_option('disabled_pages_array')),
 			'debug_mode' => get_option('debug_mode'),
             'id' => get_the_ID(),
             'img_src' => plugin_dir_url( __FILE__ ) .'img/coat.png',
@@ -45,6 +46,7 @@ function covid_banner_custom_color()
 		echo '<style type="text/css" media="screen">.covid-banner{background:' . get_option('covid_banner_color') . '}</style>';
 	} else {
 		echo '<style type="text/css" media="screen">.covid-banner{background: #ffffff;}</style>';
+		echo '<style type="text/css" media="screen">.covid-footer button{background: #ffffff;}</style>';
 	}
 
 	if (get_option('covid_banner_text_color') != ""){
@@ -66,6 +68,12 @@ function covid_banner_custom_color()
 		echo '<style type="text/css" media="screen">.covid-banner .covid-body a{color: #065fd4;}</style>';
 		echo '<style type="text/css" media="screen">.covid-banner .covid-body a:visited{color: #065fd4;}</style>';
 	}
+
+	if (get_option('covid_banner_dismiss_color') != ""){
+		echo '<style type="text/css" media="screen">.covid-footer button{color:' . get_option('covid_banner_dismiss_color') . "}</style>";
+	} else {
+		echo '<style type="text/css" media="screen">.covid-footer button{color: #606060;}</style>';
+	}
 }
 add_action('admin_menu', 'covid_banner_menu');
 function covid_banner_menu() {
@@ -78,7 +86,7 @@ function covid_banner_settings() {
     register_setting( 'covid-banner-settings-group', 'covid_banner_text_color' );
     register_setting( 'covid-banner-settings-group', 'covid_banner_header_color' );
 	register_setting( 'covid-banner-settings-group', 'covid_banner_link_color' );
-	register_setting( 'covid-banner-settings-group', 'covid_banner_text' );
+	register_setting( 'covid-banner-settings-group', 'covid_banner_dismiss_color' );
 	register_setting( 'covid-banner-settings-group', 'disabled_pages_array' );
 }
 
@@ -134,12 +142,69 @@ function covid_banner_settings_page() {
 										value="<?php echo ((get_option('covid_banner_link_color') == '') ? '#065fd4' : esc_attr( get_option('covid_banner_link_color') )); ?>">
 					</td>
 				</tr>
+
+				<tr valign="top">
+					<th scope="row">Covid Banner Disable button Color<br><span style="font-weight:400;">(Leaving this blank sets the color to the default value)</span></th>
+					<td style="vertical-align:top;">
+						<input type="text" id="covid_banner_dismiss_color" name="covid_banner_dismiss_color" placeholder="Hex value"
+										value="<?php echo esc_attr( get_option('covid_banner_dismiss_color') ); ?>" />
+						<input style="height: 30px;width: 100px;" type="color" id="covid_banner_dismiss_color_show"
+										value="<?php echo ((get_option('covid_banner_dismiss_color') == '') ? '#606060' : esc_attr( get_option('covid_banner_dismiss_color') )); ?>">
+					</td>
+				</tr>
+
+				<tr valign="top">
+						<th scope="row">
+							Disabled Pages
+							<br><span style="font-weight:400;">Disable Covid banner on the following pages.</span>
+						</th>
+						<td>
+							<div id="simple_banner_disabled_pages">
+								<?php
+									$pages = get_pages();
+									$disabled = false;
+									$disabled_pages_array = get_option('disabled_pages_array');
+									$parent_checkbox = '<input type="checkbox" ';
+									$parent_checkbox .= $disabled ? 'disabled ' : '';
+									$parent_checkbox .= (!$disabled && in_array(1, explode(",", $disabled_pages_array))) ? 'checked ' : '';
+									$parent_checkbox .= 'value="1">';
+									$parent_checkbox .= get_option( 'blogname' ) . ' | ' . get_site_url() . ' ';
+									$parent_checkbox .= '</input><br>';
+									echo $parent_checkbox;
+									foreach ( $pages as $page ) {
+										$checkbox = '<input type="checkbox"';
+										$checkbox .= $disabled ? 'disabled ' : '';
+										$checkbox .= (!$disabled && in_array($page->ID, explode(",", $disabled_pages_array))) ? 'checked ' : '';
+										$checkbox .= 'value="' . $page->ID . '">';
+										$checkbox .= $page->post_title . ' | ' . get_page_link( $page->ID ) . ' ';
+										$checkbox .= '</input><br>';
+										echo $checkbox;
+									}
+								?>
+							</div>
+							<?php
+								echo '<input type="text" hidden id="disabled_pages_array" name="disabled_pages_array" value="'. get_option('disabled_pages_array') . '" />';
+							?>
+						</td>
+					</tr>
 			</table>
 
 
 			<?php submit_button(); ?>
 		</form>
 	</div>
+
+	<script type="text/javascript">
+		document.getElementById('simple_banner_disabled_pages').onclick=function(e){
+			let disabledPagesArray = [];
+			Array.from(document.getElementById('simple_banner_disabled_pages').getElementsByTagName('input')).forEach(function(e) {
+				if (e.checked) {
+					disabledPagesArray.push(e.value);
+				}
+			});
+			document.getElementById('disabled_pages_array').value = disabledPagesArray;
+		};
+	</script>
 	<?php
 }
 ?>

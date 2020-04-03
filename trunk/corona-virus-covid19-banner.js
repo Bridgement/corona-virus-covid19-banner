@@ -1,7 +1,9 @@
 jQuery(document).ready(function($) {
-    
-	$(
-		`
+	const dismissed = localStorage.getItem("remove-covid-banner");
+
+	if (!scriptParams.in_array && dismissed !== "true") {
+		$(
+			`
         <div id="covid-banner" class="covid-banner">
             <div class="covid-group">
                 <div class="covid-img">
@@ -13,30 +15,39 @@ jQuery(document).ready(function($) {
                     <a class="covid-link" href="https://sacoronavirus.co.za/"  target="_blank">
                         <span>SAcoronavirus.co.za</span>
                     </a>
-                </div>
-            </div>
+				</div>
+			</div>
+			<div class="covid-footer">
+				<button id="covid-banner-dismiss-button">Dismiss</button>
+			</div>
         </div>`
-	).prependTo('body');
+		).prependTo("body");
 
-	var bodyPaddingLeft = $('body').css('padding-left');
-	var bodyPaddingRight = $('body').css('padding-right');
+		$("#covid-banner-dismiss-button").click(() => {
+			$("#covid-banner").remove();
+			localStorage.setItem("remove-covid-banner", "true");
+		});
 
-	if (bodyPaddingLeft != '0px') {
-		$('head').append(
-			'<style type="text/css" media="screen">.covid-banner{margin-left:-' +
-				bodyPaddingLeft +
-				';padding-left:' +
-				bodyPaddingLeft +
-				';}</style>'
-		);
-	}
-	if (bodyPaddingRight != '0px') {
-		$('head').append(
-			'<style type="text/css" media="screen">.covid-banner{margin-right:-' +
-				bodyPaddingRight +
-				';padding-right:' +
-				bodyPaddingRight +
-				';}</style>'
-		);
+		var bodyPaddingLeft = $("body").css("padding-left");
+		var bodyPaddingRight = $("body").css("padding-right");
+
+		if (bodyPaddingLeft != "0px") {
+			$("head").append(
+				'<style type="text/css" media="screen">.covid-banner{margin-left:-' +
+					bodyPaddingLeft +
+					";padding-left:" +
+					bodyPaddingLeft +
+					";}</style>"
+			);
+		}
+		if (bodyPaddingRight != "0px") {
+			$("head").append(
+				'<style type="text/css" media="screen">.covid-banner{margin-right:-' +
+					bodyPaddingRight +
+					";padding-right:" +
+					bodyPaddingRight +
+					";}</style>"
+			);
+		}
 	}
 });
