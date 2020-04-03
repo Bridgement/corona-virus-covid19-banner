@@ -3,12 +3,12 @@
  * Plugin Name: corona-virus-covid19-banner
  * Plugin URI: https://www.bridgement.com
  * Description: Display South African COVID-19 banner
- * Version: 0.2.5
+ * Version: 0.2.6
  * Author: Bridgement
  * License: GPL2
  *
  * @package corona-virus-covid19-banner
- * @version 0.2.5
+ * @version 0.2.6
  * @author Bridgement <support@bridgement.com>
  */
 
@@ -44,7 +44,7 @@ function covid_banner_custom_color()
 	if (get_option('covid_banner_color') != ""){
 		echo '<style type="text/css" media="screen">.covid-banner{background:' . get_option('covid_banner_color') . '}</style>';
 	} else {
-		echo '<style type="text/css" media="screen">.covid-banner{background: #024985;}</style>';
+		echo '<style type="text/css" media="screen">.covid-banner{background: #ffffff;}</style>';
 	}
 
 	if (get_option('covid_banner_text_color') != ""){
@@ -102,7 +102,7 @@ function covid_banner_settings_page() {
 						<input type="text" id="covid_banner_color" name="covid_banner_color" placeholder="Hex value"
 										value="<?php echo esc_attr( get_option('covid_banner_color') ); ?>" />
 						<input style="height: 30px;width: 100px;" type="color" id="covid_banner_color_show"
-										value="<?php echo ((get_option('covid_banner_color') == '') ? '#024985' : esc_attr( get_option('covid_banner_color') )); ?>">
+										value="<?php echo ((get_option('covid_banner_color') == '') ? '#ffffff' : esc_attr( get_option('covid_banner_color') )); ?>">
 					</td>
 				</tr>
 
