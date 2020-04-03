@@ -3,12 +3,12 @@
  * Plugin Name: corona-virus-covid19-banner
  * Plugin URI: https://www.bridgement.com
  * Description: Display South African COVID-19 banner
- * Version: 0.2.2
+ * Version: 0.2.5
  * Author: Bridgement
  * License: GPL2
  *
  * @package corona-virus-covid19-banner
- * @version 0.2.2
+ * @version 0.2.5
  * @author Bridgement <support@bridgement.com>
  */
 

@@ -18,7 +18,7 @@ jobs:
             - run:
                   name: "Setup custom variables"
                   command: |
-                        echo 'export GIT_COMMIT_DESC="$(git log --format=oneline -n 1 $CIRCLE_SHA1)"' >> $BASH_ENV
+                      echo 'export GIT_COMMIT_DESC="$(git log --format=oneline -n 1 $CIRCLE_SHA1)"' >> $BASH_ENV
             - run:
                   name: "Install subversion"
                   command: |
@@ -27,11 +27,8 @@ jobs:
                   name: "Deploy to SVN"
                   command: |
                       echo ${GIT_COMMIT_DESC}
-                      cd svn-repository
                       svn up
                       svn ci -m "${GIT_COMMIT_DESC}" --username ${SVN_USERNAME} --password ${SVN_PASSWORD}
-
-
 
 workflows:
     deploy_to_svn:
