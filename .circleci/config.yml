@@ -1,0 +1,43 @@
+orbs:
+    aws-ecr: circleci/aws-ecr@6.7.1
+    newrelic: bankrate/new-relic@0.1.2
+    circle-compare-url: iynere/compare-url@1.2.0
+    slack: circleci/slack@3.4.2
+    snyk: snyk/snyk@0.0.8
+version: 2.1
+
+jobs:
+    deploy:
+        docker:
+            - image: circleci/php:apache
+        steps:
+            - checkout
+            - slack/status:
+                  fail_only: true
+                  failure_message: "Failed to checkout code"
+            - run:
+                  name: "Setup custom variables"
+                  command: |
+                        echo 'export GIT_COMMIT_DESC="$(git log --format=oneline -n 1 $CIRCLE_SHA1)"' >> $BASH_ENV
+
+            - run:
+                  name: "Install subversion"
+                  command: |
+                      sudo apt-get update && sudo apt-get install subversion
+            - run:
+                  name: "Deploy to SVN"
+                  command: |
+                      cd svn-repository
+                      svn up
+                      svn ci -m ${GIT_COMMIT_DESC}
+                      
+
+
+workflows:
+    build_and_push_image:
+        jobs:
+            - deploy:
+                  filters:
+                      branches:
+                          only:
+                              - master
