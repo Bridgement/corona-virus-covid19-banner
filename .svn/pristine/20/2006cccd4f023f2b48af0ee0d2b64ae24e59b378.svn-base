@@ -3,12 +3,12 @@
  * Plugin Name: corona-virus-covid19-banner
  * Plugin URI: https://www.bridgement.com
  * Description: Display South African COVID-19 banner
- * Version: 0.4.3
+ * Version: 0.4.0
  * Author: Bridgement
  * License: GPL2
  *
  * @package corona-virus-covid19-banner
- * @version 0.4.3
+ * @version 0.4.0
  * @author Bridgement <support@bridgement.com>
  */
 
@@ -124,133 +124,11 @@ function covid_banner_settings_page() {     ?>
 			<h2>Corona Virus Covid19 Banner Settings</h2>
 		</div>
 
-		<div class="settings-page-row">
-			<div class="settings-page-column">
-			<form method="post" action="options.php">
-			<?php settings_fields( 'covid-banner-settings-group' ); ?>
-			<?php do_settings_sections( 'covid-banner-settings-group' ); ?>
-			<table class="form-table">
-				<tr valign="top">
-					<th scope="row">Share this plugin<br><span style="font-weight:400;">(Include a download link for others to get this plugin)</span></th>
-					<td style="vertical-align:top;">
-						<input type="checkbox" id="covid_banner_share" name="covid_banner_share" placeholder="Hex value" value="<?php echo esc_attr( get_option( 'covid_banner_share' ) ); ?>" <?php echo( esc_attr( get_option( 'covid_banner_share' ) ) === 'true' ? 'checked ' : '' ); ?> />
-					</td>
-				</tr>
+		<p>Use Hex color values for the color fields.</p>
+		<p>Links in the banner text must be typed in with HTML <code>&lt;a&gt;</code> tags.
+		<br />e.g. <code>This is a &lt;a href=&#34;http:&#47;&#47;www.wordpress.com&#34;&gt;Link to WordPress&lt;&#47;a&gt;</code>.</p>
 
-				<tr valign="top">
-					<p>Use Hex color values for the color fields. Leaving this blank will set the color to the default value.</p>
-				</tr>
-				<tr valign="top">
-					<th scope="row">Covid Banner Background Color</th>
-					<td style="vertical-align:top;">
-						<input type="text" id="covid_banner_color" name="covid_banner_color" placeholder="Hex value"
-										value="<?php echo esc_attr( get_option( 'covid_banner_color' ) ); ?>" />
-						<input style="height: 30px;width: 100px;" type="color" id="covid_banner_color_show"
-										value="<?php echo( ( get_option( 'covid_banner_color' ) === '' ) ? '#ffffff' : esc_attr( get_option( 'covid_banner_color' ) ) ); ?>">
-					</td>
-				</tr>
-
-				<tr valign="top">
-					<th scope="row">Covid Banner Text Color</th>
-					<td style="vertical-align:top;">
-						<input type="text" id="covid_banner_text_color" name="covid_banner_text_color" placeholder="Hex value"
-										value="<?php echo esc_attr( get_option( 'covid_banner_text_color' ) ); ?>" />
-						<input style="height: 30px;width: 100px;" type="color" id="covid_banner_text_color_show"
-										value="<?php echo( ( get_option( 'covid_banner_text_color' ) === '' ) ? '#606060' : esc_attr( get_option( 'covid_banner_text_color' ) ) ); ?>">
-					</td>
-				</tr>
-				<tr valign="top">
-					<th scope="row">Covid Banner Header Color</th>
-					<td style="vertical-align:top;">
-						<input type="text" id="covid_banner_header_color" name="covid_banner_header_color" placeholder="Hex value"
-										value="<?php echo esc_attr( get_option( 'covid_banner_header_color' ) ); ?>" />
-						<input style="height: 30px;width: 100px;" type="color" id="covid_banner_header_color_show"
-										value="<?php echo( ( get_option( 'covid_banner_header_color' ) === '' ) ? '#030303' : esc_attr( get_option( 'covid_banner_header_color' ) ) ); ?>">
-					</td>
-				</tr>
-
-				<tr valign="top">
-					<th scope="row">Covid Banner Link Color</th>
-					<td style="vertical-align:top;">
-						<input type="text" id="covid_banner_link_color" name="covid_banner_link_color" placeholder="Hex value"
-										value="<?php echo esc_attr( get_option( 'covid_banner_link_color' ) ); ?>" />
-						<input style="height: 30px;width: 100px;" type="color" id="covid_banner_link_color_show"
-										value="<?php echo( ( get_option( 'covid_banner_link_color' ) === '' ) ? '#065fd4' : esc_attr( get_option( 'covid_banner_link_color' ) ) ); ?>">
-					</td>
-				</tr>
-				<tr valign="top">
-					<p>Links in the banner text must be typed in with HTML <code>&lt;a&gt;</code> tags.
-					<br />e.g. <code>This is a &lt;a href=&#34;http:&#47;&#47;www.wordpress.com&#34;&gt;Link to WordPress&lt;&#47;a&gt;</code>.</p>
-				</tr>
-				<tr valign="top">
-					<th scope="row">
-						Header Text (Limited to 20 characters)
-					</th>
-					<td>
-						<input maxlength="20" type="text" id="covid_banner_header_text" style="width: 75%;" name="covid_banner_header_text"><?php echo esc_attr( get_option( 'covid_banner_header_text' ) ); ?></input>
-					</td>
-				</tr>
-
-				<tr valign="top">
-					<th scope="row">
-						Body Text (Limited to 50 characters)
-					</th>
-					<td>
-						<input maxlength="50" type="text" id="covid_banner_body_text" style="width: 75%;" name="covid_banner_body_text"><?php echo esc_attr( get_option( 'covid_banner_body_text' ) ); ?></input>
-					</td>
-				</tr>
-
-				<tr valign="top">
-					<th scope="row">
-						Link Text (Limited to 20 characters)
-					</th>
-					<td>
-						<input maxlength="20" type="text" id="covid_banner_link_text" style="width: 75%;" name="covid_banner_link_text"><?php echo esc_attr( get_option( 'covid_banner_link_text' ) ); ?></input>
-					</td>
-				</tr>
-
-				<tr valign="top">
-						<th scope="row">
-							Disabled Pages
-							<br><span style="font-weight:400;">Disable Covid banner on the following pages.</span>
-						</th>
-						<td>
-							<div id="covid_banner_disabled_pages">
-								<?php
-									$pages            = get_pages();
-								$disabled             = false;
-								$disabled_pages_array = get_option( 'disabled_pages_array' );
-								$parent_checkbox      = '<div style="margin: 10px;" class="settings-page-row"><div class="settings-page-column-small"><input type="checkbox" ';
-								$parent_checkbox     .= $disabled ? 'disabled ' : '';
-								$parent_checkbox     .= ( ! $disabled && in_array( 1, explode( ',', $disabled_pages_array ), true ) ) ? 'checked ' : '';
-								$parent_checkbox     .= 'value="1"></input></div><div class="settings-page-column-large"><span>';
-								$parent_checkbox     .= get_option( 'blogname' ) . ' | ' . get_site_url() . ' ';
-								$parent_checkbox     .= '</span></div></div>';
-								echo $parent_checkbox;
-								foreach ( $pages as $page ) {
-									$checkbox  = '<div style="margin: 10px;" class="settings-page-row"><div class="settings-page-column-small"><input type="checkbox"';
-									$checkbox .= $disabled ? 'disabled ' : '';
-									$checkbox .= ( ! $disabled && in_array( $page->ID, explode( ',', $disabled_pages_array ), true ) ) ? 'checked ' : '';
-									$checkbox .= 'value="' . $page->ID . '"></input></div><div class="settings-page-column-large"><span>';
-									$checkbox .= $page->post_title . ' | ' . get_page_link( $page->ID ) . ' ';
-									$checkbox .= '</span></div></div>';
-									echo $checkbox;
-								}
-								?>
-							</div>
-							<?php
-								echo '<input type="text" hidden id="disabled_pages_array" name="disabled_pages_array" value="' . esc_attr( get_option( 'disabled_pages_array' ) ) . '" />';
-							?>
-						</td>
-					</tr>
-			</table>
-
-
-			<?php submit_button(); ?>
-		</form>
-			</div>
-			<div class="settings-page-column">
-			<div id="covid-banner-preview" class="covid-banner">
+		<div id="covid-banner-preview" class="covid-banner">
 			<div class="covid-group">
 				<div class="covid-img">
 					<img class="coat" src="<?php echo( plugin_dir_url( __FILE__ ) . 'img/coat.png' ); ?>" style="background-color: transparent;">
@@ -292,10 +170,128 @@ function covid_banner_settings_page() {     ?>
 			</div>
 
 		</div>
+
+		<form method="post" action="options.php">
+			<?php settings_fields( 'covid-banner-settings-group' ); ?>
+			<?php do_settings_sections( 'covid-banner-settings-group' ); ?>
+			<table class="form-table">
+
+				<tr valign="top">
+					<th scope="row">Share this plugin<br><span style="font-weight:400;">(Include a download link for others to get this plugin)</span></th>
+					<td style="vertical-align:top;">
+						<input type="checkbox" id="covid_banner_share" name="covid_banner_share" placeholder="Hex value" value="<?php echo esc_attr( get_option( 'covid_banner_share' ) ); ?>" <?php echo( esc_attr( get_option( 'covid_banner_share' ) ) === 'true' ? 'checked ' : '' ); ?> />
+					</td>
+				</tr>
+
+
+				<tr valign="top">
+					<th scope="row">Covid Banner Background Color<br><span style="font-weight:400;">(Leaving this blank sets the color to the default value)</span></th>
+					<td style="vertical-align:top;">
+						<input type="text" id="covid_banner_color" name="covid_banner_color" placeholder="Hex value"
+										value="<?php echo esc_attr( get_option( 'covid_banner_color' ) ); ?>" />
+						<input style="height: 30px;width: 100px;" type="color" id="covid_banner_color_show"
+										value="<?php echo( ( get_option( 'covid_banner_color' ) === '' ) ? '#ffffff' : esc_attr( get_option( 'covid_banner_color' ) ) ); ?>">
+					</td>
+				</tr>
+
+				<tr valign="top">
+					<th scope="row">Covid Banner Text Color<br><span style="font-weight:400;">(Leaving this blank sets the color to the default value)</span></th>
+					<td style="vertical-align:top;">
+						<input type="text" id="covid_banner_text_color" name="covid_banner_text_color" placeholder="Hex value"
+										value="<?php echo esc_attr( get_option( 'covid_banner_text_color' ) ); ?>" />
+						<input style="height: 30px;width: 100px;" type="color" id="covid_banner_text_color_show"
+										value="<?php echo( ( get_option( 'covid_banner_text_color' ) === '' ) ? '#606060' : esc_attr( get_option( 'covid_banner_text_color' ) ) ); ?>">
+					</td>
+				</tr>
+				<tr valign="top">
+					<th scope="row">Covid Banner Header Color<br><span style="font-weight:400;">(Leaving this blank sets the color to the default value)</span></th>
+					<td style="vertical-align:top;">
+						<input type="text" id="covid_banner_header_color" name="covid_banner_header_color" placeholder="Hex value"
+										value="<?php echo esc_attr( get_option( 'covid_banner_header_color' ) ); ?>" />
+						<input style="height: 30px;width: 100px;" type="color" id="covid_banner_header_color_show"
+										value="<?php echo( ( get_option( 'covid_banner_header_color' ) === '' ) ? '#030303' : esc_attr( get_option( 'covid_banner_header_color' ) ) ); ?>">
+					</td>
+				</tr>
+
+				<tr valign="top">
+					<th scope="row">Covid Banner Link Color<br><span style="font-weight:400;">(Leaving this blank sets the color to the default value)</span></th>
+					<td style="vertical-align:top;">
+						<input type="text" id="covid_banner_link_color" name="covid_banner_link_color" placeholder="Hex value"
+										value="<?php echo esc_attr( get_option( 'covid_banner_link_color' ) ); ?>" />
+						<input style="height: 30px;width: 100px;" type="color" id="covid_banner_link_color_show"
+										value="<?php echo( ( get_option( 'covid_banner_link_color' ) === '' ) ? '#065fd4' : esc_attr( get_option( 'covid_banner_link_color' ) ) ); ?>">
+					</td>
+				</tr>
+
+				<tr valign="top">
+					<th scope="row">
+						Header Text
+						<br><span style="font-weight:400;">(Leaving this blank leaves the default: 'Covid-19')</span>
+					</th>
+					<td>
+						<textarea id="covid_banner_header_text" style="height: 150px;width: 75%;" name="covid_banner_header_text"><?php echo esc_attr( get_option( 'covid_banner_header_text' ) ); ?></textarea>
+					</td>
+				</tr>
+
+				<tr valign="top">
+					<th scope="row">
+						Body Text
+						<br><span style="font-weight:400;">(Leaving this blank leaves the default text)</span>
+					</th>
+					<td>
+						<textarea id="covid_banner_body_text" style="height: 150px;width: 75%;" name="covid_banner_body_text"><?php echo esc_attr( get_option( 'covid_banner_body_text' ) ); ?></textarea>
+					</td>
+				</tr>
+
+				<tr valign="top">
+					<th scope="row">
+						Link Text
+						<br><span style="font-weight:400;">(Leaving this blank leaves the default text 'SAcoronavirus.co.za')</span>
+					</th>
+					<td>
+						<textarea id="covid_banner_link_text" style="height: 150px;width: 75%;" name="covid_banner_link_text"><?php echo esc_attr( get_option( 'covid_banner_link_text' ) ); ?></textarea>
+					</td>
+				</tr>
+
+				<tr valign="top">
+						<th scope="row">
+							Disabled Pages
+							<br><span style="font-weight:400;">Disable Covid banner on the following pages.</span>
+						</th>
+						<td>
+							<div id="covid_banner_disabled_pages">
+								<?php
+									$pages            = get_pages();
+								$disabled             = false;
+								$disabled_pages_array = get_option( 'disabled_pages_array' );
+								$parent_checkbox      = '<input type="checkbox" ';
+								$parent_checkbox     .= $disabled ? 'disabled ' : '';
+								$parent_checkbox     .= ( ! $disabled && in_array( 1, explode( ',', $disabled_pages_array ), true ) ) ? 'checked ' : '';
+								$parent_checkbox     .= 'value="1">';
+								$parent_checkbox     .= get_option( 'blogname' ) . ' | ' . get_site_url() . ' ';
+								$parent_checkbox     .= '</input><br>';
+								echo $parent_checkbox;
+								foreach ( $pages as $page ) {
+									$checkbox  = '<input type="checkbox"';
+									$checkbox .= $disabled ? 'disabled ' : '';
+									$checkbox .= ( ! $disabled && in_array( $page->ID, explode( ',', $disabled_pages_array ), true ) ) ? 'checked ' : '';
+									$checkbox .= 'value="' . $page->ID . '">';
+									$checkbox .= $page->post_title . ' | ' . get_page_link( $page->ID ) . ' ';
+									$checkbox .= '</input><br>';
+									echo $checkbox;
+								}
+								?>
 							</div>
-		</div>
+							<?php
+								echo '<input type="text" hidden id="disabled_pages_array" name="disabled_pages_array" value="' . esc_attr( get_option( 'disabled_pages_array' ) ) . '" />';
+							?>
+						</td>
+					</tr>
+			</table>
 
 
+			<?php submit_button(); ?>
+		</form>
 	</div>
 
 	<script type="text/javascript">
@@ -306,48 +302,6 @@ function covid_banner_settings_page() {     ?>
 
 		global_style.id = 'global-settings-style'
 		global_style.appendChild(document.createTextNode(`
-
-			.form-table tr td {
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				align-content: center;
-			}
-
-			.settings-page-row {
-				display: flex;
-				flex-direction: row;
-				flex-wrap: wrap;
-				width: 100%;
-			}
-
-			.settings-page-column {
-				display: flex;
-				flex-direction: column;
-				flex-basis: 100%;
-				flex: 1;
-			}
-
-			.settings-page-column-small {
-				display: flex;
-				flex-direction: column;
-				flex-basis: 100%;
-				flex: 1;
-				justify-content: center;
-				max-width: 25px;
-			}
-
-			.settings-page-column-small input {
-				margin-top: 1px;
-			}
-
-			.settings-page-column-large {
-				display: flex;
-				flex-direction: column;
-				flex-basis: 100%;
-				flex: 2;
-			}
-
 			.covid-banner {
 				outline: none;
 				top: auto;
@@ -506,10 +460,10 @@ function covid_banner_settings_page() {     ?>
 		`));
 		document.getElementsByTagName('head')[0].appendChild(global_style);
 
-		document.getElementById('covid_preview_share').style.display = document.getElementById('covid_banner_share').value === "true" ? '' : 'none';
+		document.getElementById('covid_preview_share').style.display = document.getElementById('covid_banner_share').value !== "false" ? '' : 'none';
 		document.getElementById('covid_banner_share').onchange=function(e){
 				console.log(e.target.value)
-				document.getElementById('covid_preview_share').style.display = e.target.value === "true" ? '' : 'none';
+				document.getElementById('covid_preview_share').style.display = e.target.value !== "false" ? '' : 'none';
 		};
 
 		// Banner Text
