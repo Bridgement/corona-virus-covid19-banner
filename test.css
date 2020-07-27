@@ -113,14 +113,14 @@
 	border: 0;
 }
 
-.row {
+.row-covid-banner {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
 	width: 100%;
 }
 
-.column {
+.column-covid-bannerr {
 	display: flex;
 	flex-direction: column;
 	flex-basis: 100%;
